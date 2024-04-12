@@ -53,8 +53,8 @@ JS_DROP_FILE = """
 
 JS_STATE_UPDATE = """
     let params = { signedIn: false, entered: false, roomName: "", reticulumUrl: "" };
-    if (typeof AFRAME !== "undefined" && typeof AFRAME.components['gltf-model-plus'] !== "undefined") {
-        return { signedIn: true, entered: true, roomName: "A-Frame with gltf-model-plus", reticulumUrl: "" };
+    if (typeof APP === "undefined" || typeof APP?.hubChannel === "undefined") {
+        return { signedIn: true, entered: true, roomName: "Not Hubs", reticulumUrl: "" };
     }
     try { params["signedIn"] = APP?.hubChannel?.signedIn; } catch(e) {};
     try { params["entered"] = APP?.scene?.is("entered"); } catch(e) {};
@@ -63,7 +63,7 @@ JS_STATE_UPDATE = """
     return params;
 """
 JS_WAYPOINT_UPDATE = """
-    if (typeof AFRAME !== "undefined" && typeof AFRAME.components['gltf-model-plus'] !== "undefined") {
+    if (typeof APP === "undefined" || typeof APP?.hubChannel === "undefined") {
         return false;
     }
     window.__scene_debugger_scene_update_listener = () => {

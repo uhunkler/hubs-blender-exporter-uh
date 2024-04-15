@@ -1045,7 +1045,7 @@ def set_url(self, value):
     try:
         import urllib
         parsed = urllib.parse.urlparse(value)
-        parsed = parsed._replace(scheme="https")
+        # parsed = parsed._replace(scheme="https")
         self.url_ = urllib.parse.urlunparse(parsed)
     except Exception:
         self.url_ = "https://hubs.mozilla.com/demo"
